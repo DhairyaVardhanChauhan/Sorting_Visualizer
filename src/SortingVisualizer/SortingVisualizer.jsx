@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import "./SortingVisualizer.css";
 import getMerge from "../Sorting_Algos/merge_sort";
 import bubble_sort from "../Sorting_Algos/bubble_sort";
+import QuickSort from "../Sorting_Algos/quick_sort";
 
 const SortingVisualizer = () => {
   const randomIntFromIntervals = (min, max) => {
@@ -40,6 +41,39 @@ const SortingVisualizer = () => {
       }
     }
   };
+
+
+  const handleQuick = (arr, setArr, animationSpeed) => {
+    const animation = QuickSort(arr);
+    for(let i = 0;i<animation.length;i++){
+      let isColorChange = i%4 == 0 || i%4 == 1;
+      const arrayBars = document.querySelectorAll(".array-bar");
+      if(isColorChange === true){
+        const color = i%4 === 0? "red":"pink";
+        const [barOneIdx,barTwoIdx] = animation[i];
+        if(barOneIdx === -1){
+          continue;
+        }
+        const barOneStyle = arrayBars[barOneIdx].style;
+        const barTwoStyle = arrayBars[barTwoIdx].style;
+        setTimeout(() => {
+          barOneStyle.backgroundColor = color;
+          barTwoStyle.backgroundColor = color;
+        }, i * animationSpeed);
+      }
+      else{
+          const [barIdx,newHeight] = animation[i];
+          if(barIdx === -1){
+            continue;
+          }
+          const barOneStyle = arrayBars[barIdx].style;
+          setTimeout(()=>{
+            barOneStyle.height = `${newHeight}px`;
+          },i*animationSpeed)
+      }
+    }
+  };
+
 
   const [size, setSize] = useState(10);
   const [animationSpeed, setAnimationSpeed] = useState(1);
@@ -100,6 +134,14 @@ const SortingVisualizer = () => {
           }}
         >
           Bubble Sort
+        </button>
+        <button
+          className="sort-btn"
+          onClick={() => {
+            handleQuick(arr, setArr, animationSpeed);
+          }}
+        >
+          Quick Sort
         </button>
         <button
           className="sort-btn"
