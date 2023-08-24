@@ -1,0 +1,67 @@
+
+.array-container{
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: end;   
+
+}
+
+.array-bar{
+    background-color: pink;
+    display: inline-block;
+}
+
+.nav{
+    position: fixed;
+    top:0px;
+    left: 0px;
+    right: 0px;
+    display: flex;
+    height: 4rem;
+    align-items: center;
+    justify-content: end;
+    padding-right: 20px;
+}
+
+.sort-btn{
+    height: 40px;
+    width: 150px;
+    margin-left: 40px;
+}
+
+.slider-size{
+    cursor: pointer;
+    margin-right: 20px;
+}
+
+
+
+.slider-size:active{
+    accent-color: green;
+}
+
+
+.animation-div{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+.animation-div .speed-toolTip{
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.215);
+    min-width: 60px;
+    bottom: -30px;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.animation-div:hover .speed-toolTip{
+    opacity: 1;
+}
+
+
+
