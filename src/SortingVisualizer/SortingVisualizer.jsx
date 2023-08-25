@@ -3,6 +3,7 @@ import "./SortingVisualizer.css";
 import getMerge from "../Sorting_Algos/merge_sort";
 import bubble_sort from "../Sorting_Algos/bubble_sort";
 import QuickSort from "../Sorting_Algos/quick_sort";
+import Insertion from "../Sorting_Algos/Insertion";
 
 const SortingVisualizer = () => {
   const randomIntFromIntervals = (min, max) => {
@@ -45,6 +46,7 @@ const SortingVisualizer = () => {
 
   const handleQuick = (arr, setArr, animationSpeed) => {
     const animation = QuickSort(arr);
+    console.log(animation);
     for(let i = 0;i<animation.length;i++){
       let isColorChange = i%4 == 0 || i%4 == 1;
       const arrayBars = document.querySelectorAll(".array-bar");
@@ -68,12 +70,24 @@ const SortingVisualizer = () => {
           }
           const barOneStyle = arrayBars[barIdx].style;
           setTimeout(()=>{
+            
             barOneStyle.height = `${newHeight}px`;
           },i*animationSpeed)
       }
     }
   };
 
+  const handleInsertion = (arr,setArr,animationSpeed) =>{
+      const animation = Insertion(arr);
+      const arrayBars = document.querySelectorAll(".array-bar");
+      for (let i = 0; i < animation.length; i++) {
+          const [barIdx, newHeight] = animation[i];
+          const barOneStyle = arrayBars[barIdx].style;
+          setTimeout(() => {
+            barOneStyle.height = `${newHeight}px`;
+          }, i * animationSpeed);
+      }
+  }
 
   const [size, setSize] = useState(10);
   const [animationSpeed, setAnimationSpeed] = useState(1);
@@ -146,6 +160,14 @@ const SortingVisualizer = () => {
         <button
           className="sort-btn"
           onClick={() => {
+            handleInsertion(arr, setArr, animationSpeed);
+          }}
+        >
+          Insertion Sort
+        </button>
+        <button
+          className="sort-btn"
+          onClick={() => {
             setArr(createArray());
           }}
         >
@@ -157,7 +179,7 @@ const SortingVisualizer = () => {
           return (
             <div
               className="array-bar"
-              style={{ height: `${value}px`, width: "30px" }}
+              style={{ height: `${value}px`, width: "100px" }}
               key={idx}
             >
               <h4 style={{ fontSize: "6px" }} className="number-header"></h4>
